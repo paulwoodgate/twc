@@ -8,9 +8,9 @@ export function getAllEvents(req, res) {
     .sort({ date: 'asc' })
     .exec((err, results) => {
       if (err) {
-        res.status(500).json({ message: err });
+        res.status(500).json(err);
       } else {
-        res.status(200).json({ events: results });
+        res.status(200).json(results);
       }
     });
 }
@@ -19,12 +19,12 @@ export function getUpcomingEvents(req, res) {
   const now = moment().startOf('day').format();
   Event.find({ date: { $gte: now } })
     .sort({ date: 'asc' })
-    .select('id type title image leave length date')
+    .select('id type title image leave length formattedLength formattedDate date')
     .exec((err, results) => {
       if (err) {
-        res.status(500).json({ message: err });
+        res.status(500).json(err);
       } else {
-        res.status(200).json({ events: results });
+        res.status(200).json(results);
       }
     });
 }
@@ -33,7 +33,7 @@ export function getEvent(req, res) {
   const id = req.params.id;
   Event.findOne({ id: id }).exec((err, event) => {
     if (err) {
-      res.status(500).json({ message: err });
+      res.status(500).json(err);
     } else if (!event) {
       res.status(404);
     } else {

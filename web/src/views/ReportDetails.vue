@@ -1,7 +1,7 @@
 <template>
   <b-container fluid style="text-align: left">
     <b-row>
-      <banner :title="report.date + ' - ' + report.title" class="mb-5" />
+      <banner :title="report.formattedDate + ' - ' + report.title" class="mb-5" />
     </b-row>
     <b-row>
       <b-col></b-col>
@@ -24,15 +24,8 @@
       <b-container fluid class="mt-5">
         <b-row>
           <b-col style="text-align: center;">
-            <div
-              v-for="photo in collection.photos"
-              :key="photo"
-              style="margin:10px; display: inline-block;"
-            >
-              <b-img
-                thumbnail
-                :src="require('../../public/photos/' + year + '/' + photo.file)"
-              ></b-img>
+            <div v-for="photo in collection.photos" :key="photo" style="margin:10px; display: inline-block;">
+              <b-img thumbnail :src="require('../../public/photos/' + year + '/' + photo.file)"></b-img>
               <p>{{ photo.caption }}</p>
             </div>
           </b-col>
@@ -46,17 +39,23 @@
 </template>
 
 <script>
-import Banner from "@/components/common/Banner.vue";
+import Banner from '@/components/common/Banner.vue';
+import DataService from '../data-service';
+
 export default {
-  name: "ReportDetails",
-  props: ["id"],
+  name: 'ReportDetails',
+  props: ['id'],
+  data() {
+    return {
+      report: {}
+    };
+  },
+  async created() {
+    this.report = await DataService.getReportDetails(this.id);
+  },
   computed: {
     year() {
       return this.id.substr(5, 4);
-    },
-    report() {
-      var reports = require(`../../public/reports${this.year}.json`);
-      return reports.find(report => report.id === this.id);
     }
   },
   components: {

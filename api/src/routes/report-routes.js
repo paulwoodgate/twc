@@ -4,6 +4,7 @@ import express from 'express';
 import {
   getAllReports,
   getReport,
+  getReportYears,
   getYearReports,
   createReport,
   deleteReport,
@@ -13,6 +14,7 @@ import {
 const router = express.Router();
 
 router.get('/', getAllReports);
+router.get('/years', getReportYears);
 router.get('/:year', getYearReports);
 router.get('/detail/:id', getReport);
 router.put('/', updateReport);

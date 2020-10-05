@@ -1,6 +1,7 @@
 'use strict';
 
 import mongoose from 'mongoose';
+import { format } from 'date-fns';
 
 const reportSchema = new mongoose.Schema({
   id: {
@@ -11,9 +12,13 @@ const reportSchema = new mongoose.Schema({
     type: Date,
     required: [true, 'Please enter the event date']
   },
+  year: {
+    type: Number,
+    required: [true, 'Please enter the event year']
+  },
   title: {
     type: String,
-    required: [true, 'Please enter an event title']
+    required: [true, 'Please enter the event title']
   },
   report: {
     type: Array,
@@ -31,4 +36,8 @@ const reportSchema = new mongoose.Schema({
   photoCollections: Array
 });
 
+reportSchema.set('toJSON', { virtuals: true });
+reportSchema.virtual('formattedDate').get(function () {
+  return format(this.date, 'eeee do MMMM');
+});
 module.exports = mongoose.model('Report', reportSchema);

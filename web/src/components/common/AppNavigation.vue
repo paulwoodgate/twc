@@ -3,7 +3,7 @@
     <b-navbar toggleable="lg" type="dark" variant="success" fixed="top">
       <b-navbar-brand to="/" class="p-0">
         <img
-          src="@/components/common/assets/TWCLogo.jpg"
+          src="../../../public/images/TWCLogo.jpg"
           class="d-inline-block align-center"
           width="140px"
           height="60px"
@@ -30,6 +30,12 @@
             <b-dropdown-item to="/checklist">Kit Checklist</b-dropdown-item>
             <b-dropdown-item to="/adminstuff">Admin Stuff</b-dropdown-item>
           </b-nav-item-dropdown>
+          <b-nav-item-dropdown text="Admin">
+            <b-dropdown-item to="/admin/reports">Maintain Reports</b-dropdown-item>
+            <b-dropdown-divider></b-dropdown-divider>
+            <b-dropdown-item to="/admin/events">Maintain Events</b-dropdown-item>
+            <b-dropdown-item to="/admin/import">Import Events</b-dropdown-item>
+          </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -38,6 +44,6 @@
 
 <script>
 export default {
-  name: "AppNavigation",
+  name: 'AppNavigation'
 };
 </script>

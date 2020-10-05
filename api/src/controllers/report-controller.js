@@ -8,38 +8,47 @@ export function getAllReports(req, res) {
     .sort({ date: 'asc' })
     .exec((err, results) => {
       if (err) {
-        res.status(500).json({ message: err });
+        res.status(500).json(err);
       } else {
-        res.status(200).json({ Reports: results });
+        res.status(200).json(results);
       }
     });
 }
 
+export function getReportYears(req, res) {
+  Report.distinct('year').exec((err, results) => {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      res.status(200).json(results.sort());
+    }
+  });
+}
 export function getYearReports(req, res) {
   const yearStart = `${req.params.year}0101`;
   const start = moment(yearStart, 'YYYYMMDD').startOf('year');
   const finish = moment(yearStart, 'YYYYMMDD').endOf('year');
   Report.find({ date: { $gte: start, $lte: finish } })
     .sort({ date: 'asc' })
-    .select('id title date')
+    .select('id title date formattedDate coverPhoto')
     .exec((err, results) => {
       if (err) {
-        res.status(500).json({ message: err });
+        res.status(500).json(err);
       } else {
-        res.status(200).json({ Reports: results });
+        res.status(200).json(results);
       }
     });
 }
 
 export function getReport(req, res) {
   const id = req.params.id;
-  Report.findOne({ id: id }).exec((err, Report) => {
+  Report.findOne({ id: id }).exec((err, report) => {
     if (err) {
-      res.status(500).json({ message: err });
-    } else if (!Report) {
+      res.status(500).json(err);
+    } else if (!report) {
       res.status(404);
     } else {
-      res.status(200).json(Report);
+      res.status(200).json(report);
     }
   });
 }

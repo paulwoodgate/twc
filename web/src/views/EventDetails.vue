@@ -1,12 +1,12 @@
 <template>
   <b-container fluid style="text-align: left">
     <b-row>
-      <banner :title="event.date + ' - ' + event.title" class="mb-3" />
+      <banner :title="event.formattedDate + ' - ' + event.title" class="mb-3" />
     </b-row>
     <b-row v-if="event.type == 'Walk'">
       <b-container>
         <b-row>
-          <b-col cols="2"></b-col><b-col>{{ event.description }}</b-col>
+          <b-col cols="2"></b-col><b-col>{{ event.description[0] }}</b-col>
         </b-row>
         <br />
         <b-row>
@@ -14,20 +14,20 @@
             <b>Area</b>
           </b-col>
           <b-col>
-            {{ event.area }}
+            {{ event.county }}
           </b-col>
         </b-row>
         <b-row>
           <b-col cols="2">
             <b>Walk Length</b>
           </b-col>
-          <b-col>{{ event.length }} </b-col>
+          <b-col>{{ event.formattedLength }} </b-col>
         </b-row>
         <b-row>
           <b-col cols="2">
             <b>Walk Time</b>
           </b-col>
-          <b-col>{{ event.walkTime }} </b-col>
+          <b-col>{{ event.formattedTime }} </b-col>
         </b-row>
         <b-row>
           <b-col cols="2">
@@ -60,6 +60,14 @@
         <br />
         <b-row>
           <b-col cols="2">
+            <b>Distance Away</b>
+          </b-col>
+          <b-col>
+            {{ event.formattedDistance }}
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col cols="2">
             <b>Leave From</b>
           </b-col>
           <b-col>{{ event.leave }} </b-col>
@@ -74,7 +82,7 @@
           <b-col cols="2">
             <b>3 Word Address</b>
           </b-col>
-          <b-col>{{ event.w3wAddress }} </b-col>
+          <b-col>{{ event.w3wReference }} </b-col>
         </b-row>
         <b-row>
           <b-col cols="2">
@@ -86,7 +94,7 @@
           <b-col cols="2">
             <b>Estimated Fuel Cost</b>
           </b-col>
-          <b-col>{{ event.fuelCost }} </b-col>
+          <b-col>{{ event.formattedCost }} </b-col>
         </b-row>
       </b-container>
     </b-row>
@@ -117,21 +125,19 @@
 </template>
 
 <script>
-import Banner from "@/components/common/Banner.vue";
-import Events from "../../public/events.json";
+import Banner from '@/components/common/Banner.vue';
+import DataService from '../data-service';
+
 export default {
-  name: "EventDetails",
-  props: ["id"],
+  name: 'EventDetails',
+  props: ['id'],
   data() {
     return {
-      events: Events
+      event: {}
     };
   },
-  computed: {
-    event() {
-      var e = this.events.find(event => event.id === this.id);
-      return e;
-    }
+  async created() {
+    this.event = await DataService.getEventDetails(this.id);
   },
   components: {
     Banner
