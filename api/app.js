@@ -3,7 +3,6 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const bodyParser = require('body-parser');
 const rateLimit = require('express-rate-limit');
 const xss = require('xss-clean');
 const hpp = require('hpp');
@@ -15,7 +14,7 @@ connectToDB();
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(morgan('dev'));
 app.use(xss());
 app.use(hpp());
