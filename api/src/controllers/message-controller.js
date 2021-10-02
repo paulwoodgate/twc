@@ -2,7 +2,7 @@
 
 import Message from '../models/message-model';
 
-exports.createMessage = (req, res) => {
+exports.createMessage = async (req, res) => {
   const data = req.body;
   const message = new Message({
     name: data.name,
@@ -10,8 +10,10 @@ exports.createMessage = (req, res) => {
     message: data.message
   });
 
-  message
-    .save()
-    .then((savedMsg) => res.status(200).json(savedMsg))
-    .catch((err) => res.status(500).json(err));
+  try {
+    const savedMsg = await message.save();
+    res.status(200).json(savedMsg);
+  } catch (error) {
+    res.status(500).json(error);
+  }
 };

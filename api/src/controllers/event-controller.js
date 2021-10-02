@@ -1,7 +1,7 @@
 'use strict';
 
 import Event from '../models/event-model';
-import moment from 'moment';
+import { startOfDay } from 'date-fns';
 
 export function getAllEvents(req, res) {
   Event.find({})
@@ -16,7 +16,7 @@ export function getAllEvents(req, res) {
 }
 
 export function getUpcomingEvents(req, res) {
-  const now = moment().startOf('day').format();
+  const now = startOfDay(new Date());
   Event.find({ date: { $gte: now } })
     .sort({ date: 'asc' })
     .select('id type title image leave length formattedLength formattedDate date')

@@ -1,6 +1,5 @@
 'use strict';
 
-import moment from 'moment';
 import Report from '../models/report-model';
 
 export function getAllReports(req, res) {
@@ -25,9 +24,8 @@ export function getReportYears(req, res) {
   });
 }
 export function getYearReports(req, res) {
-  const yearStart = `${req.params.year}0101`;
-  const start = moment(yearStart, 'YYYYMMDD').startOf('year');
-  const finish = moment(yearStart, 'YYYYMMDD').endOf('year');
+  const start = new Date(req.params.year, 0, 1);
+  const finish = new Date(req.params.year, 11, 31);
   Report.find({ date: { $gte: start, $lte: finish } })
     .sort({ date: 'asc' })
     .select('id title date formattedDate coverPhoto')
