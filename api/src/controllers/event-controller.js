@@ -53,3 +53,8 @@ export function createEvent(req, res) {
 export function deleteEvent(req, res) {
   res.send('delete event');
 }
+
+export function importEvent(req, res) {
+  // const filename = req.params.filename;
+  res.send('import events');
+}

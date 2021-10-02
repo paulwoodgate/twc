@@ -2,11 +2,11 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config({
-  path: './config.env',
+  path: './config.env'
 });
 export function connectToDB() {
   mongoose.connect(
-    process.env.MONGODB_URL,
+    process.env.NODE_ENVIRONMENT == 'Test' ? process.env.MONGODB_TEST_URL : process.env.MONGODB_URL,
     { useNewUrlParser: true, useUnifiedTopology: true },
     (error) => {
       if (error) {

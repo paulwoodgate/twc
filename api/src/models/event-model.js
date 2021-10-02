@@ -1,7 +1,7 @@
 'use strict';
 
 import mongoose from 'mongoose';
-import moment from 'moment';
+import { formatEventDate, formatWeekendDates } from '../services/date-service';
 
 const eventSchema = new mongoose.Schema(
   {
@@ -48,21 +48,26 @@ eventSchema.set('toJSON', { virtuals: true });
 
 eventSchema.virtual('formattedDate').get(function () {
   if (this.type === 'Weekend') {
-    const endDate = moment(this.date).add(this.length, 'days');
-    if (moment(this.date).month === moment(endDate).month) {
-      return `${moment(this.date).format('dddd Do')} to ${moment(endDate).format('dddd Do MMMM')}`;
-    }
-    return `${moment(this.date).format('dddd Do MMMM')} to ${moment(endDate).format('dddd Do MMMM')}`;
+    return formatWeekendDates(this.date, this.length);
   }
-  return moment(this.date).format('dddd Do MMMM');
+  return formatEventDate(this.date);
+});
+eventSchema.virtual('shortDate').get(function () {
+  return formatEventDate(this.date);
+});
+eventSchema.virtual('formattedLength').get(function () {
+  return formatMiles(this.length);
+});
+eventSchema.virtual('formattedDistance').get(function () {
+  return formatMiles(this.distanceAway);
 });
 
-eventSchema.virtual('formattedLength').get(function () {
-  if (this.length === undefined) {
+function formatMiles(distance) {
+  if (distance === undefined) {
     return '';
   }
-  return `${this.length} miles`;
-});
+  return `${distance} miles`;
+}
 
 eventSchema.virtual('formattedTime').get(function () {
   if (this.walkTime === undefined) {
@@ -78,13 +83,6 @@ eventSchema.virtual('formattedTime').get(function () {
   }
 
   return value;
-});
-
-eventSchema.virtual('formattedDistance').get(function () {
-  if (this.distanceAway === undefined) {
-    return '';
-  }
-  return `${this.distanceAway} miles`;
 });
 
 eventSchema.virtual('formattedCost').get(function () {

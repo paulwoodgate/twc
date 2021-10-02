@@ -1,4 +1,7 @@
 api/node_modules/**
-web/node_modules/**
+api/coverage/**
+client/node_modules/**
+client/public/photos/**
+client/public/images/**
 .vscode/launch.json
 .vscode/settings.json

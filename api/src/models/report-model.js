@@ -1,7 +1,7 @@
 'use strict';
 
 import mongoose from 'mongoose';
-import { format } from 'date-fns';
+import { formatEventDate } from '../services/date-service';
 
 const reportSchema = new mongoose.Schema({
   id: {
@@ -38,6 +38,6 @@ const reportSchema = new mongoose.Schema({
 
 reportSchema.set('toJSON', { virtuals: true });
 reportSchema.virtual('formattedDate').get(function () {
-  return format(this.date, 'eeee do MMMM');
+  return formatEventDate(this.date);
 });
 module.exports = mongoose.model('Report', reportSchema);

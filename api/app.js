@@ -8,7 +8,6 @@ const rateLimit = require('express-rate-limit');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const helmet = require('helmet');
-// const db = require('./src/services/db');
 import { registerRoutes } from './routes.js';
 import { connectToDB } from './src/services/db';
 
@@ -25,7 +24,7 @@ app.use(helmet());
 const limiter = rateLimit({
   max: 150,
   windowMs: 60 * 60 * 1000,
-  message: 'Too many requests from this IP, please try again in an hour',
+  message: 'Too many requests from this IP, please try again in an hour'
 });
 app.use('/api', limiter);
 

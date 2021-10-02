@@ -1,13 +1,10 @@
 'use strict';
 
-// import express from 'express';
-// const app = express();
-
 import http from 'http';
 import dotenv from 'dotenv';
 
 dotenv.config({
-  path: './config.env',
+  path: './config.env'
 });
 
 import app from './app';
