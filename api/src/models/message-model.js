@@ -10,7 +10,7 @@ const messageSchema = new mongoose.Schema({
   email: {
     type: String,
     required: [true, 'Please enter your email'],
-    match: [/^.+@(?:[\w-]+\.)+\w+$/, 'Thats not a valid email address']
+    match: [/^.+@(?:[\w-]+\.)+\w+$/, "That's not a valid email address"]
   },
   message: {
     type: String,

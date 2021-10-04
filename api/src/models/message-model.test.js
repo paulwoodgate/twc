@@ -31,7 +31,7 @@ describe('Message Model Tests', () => {
 
     const err = msg.validateSync();
 
-    expect(err.errors['email'].message).toBe('Thats not a valid email address');
+    expect(err.errors['email'].message).toBe("That's not a valid email address");
   });
   test('it should fail validation if message is missing', () => {
     const msg = new Message({
