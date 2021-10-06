@@ -4,7 +4,7 @@
   "description": "The Walking Club API",
   "main": "server.js",
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest",
     "dev": "npx nodemon --exec npx babel-node server.js",
     "debug": "npx nodemon --exec npx babel-node --inspect=9229 server.js",
     "start": "node server.js",
@@ -34,6 +34,7 @@
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^6.15.0",
     "jest": "^27.2.0",
+    "mockingoose": "^2.15.2",
     "nodemon": "^2.0.12",
     "supertest": "^6.1.6"
   }

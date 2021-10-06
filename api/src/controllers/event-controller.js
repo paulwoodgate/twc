@@ -3,58 +3,38 @@
 import Event from '../models/event-model';
 import { startOfDay } from 'date-fns';
 
-export function getAllEvents(req, res) {
-  Event.find({})
-    .sort({ date: 'asc' })
-    .exec((err, results) => {
-      if (err) {
-        res.status(500).json(err);
-      } else {
-        res.status(200).json(results);
-      }
-    });
-}
+exports.getAllEvents = async (req, res) => {
+  try {
+    const results = await Event.find({}).sort({ date: 'asc' }).exec();
+    res.status(200).json(results);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 
-export function getUpcomingEvents(req, res) {
-  const now = startOfDay(new Date());
-  Event.find({ date: { $gte: now } })
-    .sort({ date: 'asc' })
-    .select('id type title image leave length formattedLength formattedDate date')
-    .exec((err, results) => {
-      if (err) {
-        res.status(500).json(err);
-      } else {
-        res.status(200).json(results);
-      }
-    });
-}
+exports.getUpcomingEvents = async (req, res) => {
+  try {
+    const now = startOfDay(new Date());
+    const results = await Event.find({ date: { $gte: now } })
+      .sort({ date: 'asc' })
+      .select('id type title image leave length formattedLength formattedDate date')
+      .exec();
+    res.status(200).json(results);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 
-export function getEvent(req, res) {
+exports.getEvent = async (req, res) => {
   const id = req.params.id;
-  Event.findOne({ id: id }).exec((err, event) => {
-    if (err) {
-      res.status(500).json(err);
-    } else if (!event) {
-      res.status(404);
+  try {
+    const event = await Event.findOne({ id: id }).exec();
+    if (!event) {
+      res.status(404).json('Event not found');
     } else {
       res.status(200).json(event);
     }
-  });
-}
-
-export function updateEvent(req, res) {
-  res.send('update event');
-}
-
-export function createEvent(req, res) {
-  res.send('create event');
-}
-
-export function deleteEvent(req, res) {
-  res.send('delete event');
-}
-
-export function importEvent(req, res) {
-  // const filename = req.params.filename;
-  res.send('import events');
-}
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
