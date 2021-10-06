@@ -45,12 +45,14 @@ describe('Report Controller Tests', () => {
       const response = await request(app).get('/api/reports/years').expect(200);
       const years = response.body;
       expect(years.length).toBe(2);
+      expect(years[0]).toBe(2020);
+      expect(years[1]).toBe(2021);
     });
 
     test('Should return status 500 if error', async () => {
       mockingoose(Report).toReturn(new Error('Error finding'), 'distinct');
 
-      await request(app).get('/api/reports').expect(500);
+      await request(app).get('/api/reports/years').expect(500);
     });
   });
 

@@ -22,7 +22,7 @@
         </p>
         <p>
           Our main meeting place in Peterborough is the
-          <a href="https://www.google.com/maps/@52.57291,-0.29139,15.04z" target="_blank">
+          <a href="https://www.google.com/maps/@52.5729226,-0.291388,15.04z" target="_blank">
             car park at Thorpe Wood
           </a>
           , which is on Holywell Lane where it joins Thorpe Road PE3 6NB (///faced.noise.dated). For walks
