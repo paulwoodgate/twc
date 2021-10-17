@@ -9,6 +9,11 @@ const hpp = require('hpp');
 const helmet = require('helmet');
 import { registerRoutes } from './routes.js';
 import { connectToDB } from './src/services/db';
+import dotenv from 'dotenv';
+
+dotenv.config({
+  path: './config.env'
+});
 
 connectToDB();
 const app = express();

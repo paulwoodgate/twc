@@ -1,13 +1,8 @@
 'use strict';
 
 import http from 'http';
-import dotenv from 'dotenv';
-
-dotenv.config({
-  path: './config.env'
-});
-
 import app from './app';
+
 app.get(
   '/',
   app.get('/', (req, res) => res.send('Hello'))
