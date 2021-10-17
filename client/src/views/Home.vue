@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import DataService from '../data-service';
+import DataService from '../services/data-service';
 export default {
   name: 'home',
   computed: {

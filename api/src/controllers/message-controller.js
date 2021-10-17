@@ -14,6 +14,7 @@ exports.createMessage = async (req, res) => {
     const savedMsg = await message.save();
     res.status(200).json(savedMsg);
   } catch (error) {
+    console.log('Error', error);
     res.status(500).json(error);
   }
 };

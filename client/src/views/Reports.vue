@@ -29,7 +29,7 @@
 
 <script>
 import Banner from '@/components/common/Banner.vue';
-import DataService from '../data-service';
+import DataService from '../services/data-service';
 
 export default {
   name: 'Reports',

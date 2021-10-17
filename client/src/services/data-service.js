@@ -1,8 +1,11 @@
 /* eslint-disable no-console */
 import axios from 'axios';
+//import dotenv from 'dotenv';
 
-const apiUrl = 'http://localhost:3000/api';
-
+// const apiUrl = 'http://localhost:3000/api';
+const apiUrl = process.env.VUE_APP_API_URL;
+console.log(process.env);
+console.log(process.env.API_URL);
 export default {
   getAllEvents: async () => {
     let events = [];
@@ -50,13 +53,12 @@ export default {
     return report;
   },
   sendMessage: async message => {
-    let success = false;
-    // message.timestamp = Date.now;
-    await axios
-      .post(apiUrl + '/messages', message)
-      .then(() => (success = true))
-      .catch(err => alert(err));
-
-    return success;
+    try {
+      await axios.post(apiUrl + '/messages', message);
+      return true;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
   }
 };
