@@ -25,7 +25,7 @@
         <b-row>
           <b-col style="text-align: center;">
             <div v-for="photo in collection.photos" :key="photo" style="margin:10px; display: inline-block;">
-              <b-img thumbnail :src="require('../../public/photos/' + year + '/' + photo.file)"></b-img>
+              <b-img thumbnail :src="'/assets/photos/' + year + '/' + photo.file"></b-img>
               <p>{{ photo.caption }}</p>
             </div>
           </b-col>

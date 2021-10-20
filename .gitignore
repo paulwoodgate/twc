@@ -1,7 +1,8 @@
 api/node_modules/**
 api/coverage/**
+api/dist/**
+api/assets/**
 client/node_modules/**
-client/public/photos/**
-client/public/images/**
+client/src/assets/**
 .vscode/launch.json
 .vscode/settings.json

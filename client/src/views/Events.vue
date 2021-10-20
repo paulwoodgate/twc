@@ -12,7 +12,7 @@
         class="mb-2"
       >
         <b-link :to="'/event/' + event.id">
-          <b-card-img v-if="event.image !== undefined" :src="require('../../public/images/' + event.image)" />
+          <b-card-img v-if="event.image !== undefined" :src="'/assets/images/' + event.image" />
           <b-card-title>{{ event.title }}</b-card-title>
           <b-card-text>{{ event.formattedDate }}</b-card-text>
           <b-card-text>{{ event.formattedLength }}</b-card-text>

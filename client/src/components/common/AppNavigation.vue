@@ -3,7 +3,7 @@
     <b-navbar toggleable="lg" type="dark" variant="success" fixed="top">
       <b-navbar-brand to="/" class="p-0">
         <img
-          src="../../../public/images/TWCLogo.jpg"
+          src="/assets/images/TWCLogo.jpg"
           class="d-inline-block align-center"
           width="140px"
           height="60px"

@@ -76,7 +76,7 @@ a.custom-link {
   color: black !important;
 }
 .Banner {
-  background-image: url('../../public/images/GreatRidge.png');
+  background-image: url('/assets/images/GreatRidge.png');
   color: white;
   height: 60vh;
   text-align: center;

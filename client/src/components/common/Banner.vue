@@ -14,7 +14,7 @@ export default {
     backgroundUrl() {
       var images = ['PeakSkyline', 'BradgatePark', 'OldJohn', 'KeswickPanorama', 'IvinghoeBeacon'];
       var randomNumber = Math.floor(Math.random() * 5);
-      var url = require(`../../../public/images/${images[randomNumber]}.png`);
+      var url = `/assets/images/${images[randomNumber]}.png`;
       return url;
     }
   }
@@ -23,7 +23,7 @@ export default {
 
 <style scoped>
 #banner {
-  background-image: url('../../../public/images/PeakSkyline.png');
+  background-image: '/assets/images/PeakSkyline.png';
   text-align: center;
   background-color: black;
   height: 25vh;
