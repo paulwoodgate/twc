@@ -15,7 +15,7 @@
           <b-card-img v-if="event.image !== undefined" :src="'/assets/images/' + event.image" />
           <b-card-title>{{ event.title }}</b-card-title>
           <b-card-text>{{ event.formattedDate }}</b-card-text>
-          <b-card-text>{{ event.formattedLength }}</b-card-text>
+          <b-card-text v-if="event.type == 'Walk'">{{ event.formattedLength }}</b-card-text>
           <b-card-text>{{ event.leave }}</b-card-text>
         </b-link>
       </b-card>
