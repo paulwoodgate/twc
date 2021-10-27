@@ -7,13 +7,12 @@
     "test": "jest",
     "dev": "npx nodemon --exec npx babel-node server.js",
     "debug": "npx nodemon --exec npx babel-node --inspect=9229 server.js",
-    "start": "node server.js",
+    "start": "npx babel-node server.js",
     "lint": "eslint --fix --config .eslintrc.json \"**/*.js\""
   },
   "author": "Paul Woodgate",
   "license": "ISC",
   "dependencies": {
-    "connect-history-api-fallback": "^1.6.0",
     "cors": "^2.8.5",
     "date-fns": "^2.25.0",
     "debug": "^4.3.2",
