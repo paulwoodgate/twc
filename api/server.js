@@ -3,11 +3,6 @@
 import http from 'http';
 import app from './app';
 
-app.get(
-  '/',
-  app.get('/', (req, res) => res.send('Hello'))
-);
-
 const debug = require('debug')('rest-api-nodejs-mongodb:server');
 const port = normalisePort(process.env.PORT || 3000);
 app.set('port', port);

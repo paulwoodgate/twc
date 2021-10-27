@@ -10,7 +10,6 @@ const helmet = require('helmet');
 import { registerRoutes } from './routes.js';
 import { connectToDB } from './src/services/db';
 import dotenv from 'dotenv';
-import history from 'connect-history-api-fallback';
 import path from 'path';
 
 dotenv.config({
@@ -28,7 +27,6 @@ app.use(hpp());
 app.use(helmet());
 app.use('/assets', express.static(path.join(__dirname, '/assets')));
 app.use(express.static(path.resolve(__dirname, './dist'), { maxAge: '1y', etag: false }));
-app.use(history());
 
 const limiter = rateLimit({
   max: 150,

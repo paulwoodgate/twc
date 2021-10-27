@@ -20,20 +20,18 @@
       <b-col cols="10"><b>Walk Rating:</b> {{ report.walkRating }}</b-col>
       <b-col></b-col>
     </b-row>
-    <b-row v-for="collection in report.photoCollections" :key="collection">
-      <b-container fluid class="mt-5">
-        <b-row>
-          <b-col style="text-align: center;">
-            <div v-for="photo in collection.photos" :key="photo" style="margin:10px; display: inline-block;">
-              <b-img thumbnail :src="'/assets/photos/' + year + '/' + photo.file"></b-img>
-              <p>{{ photo.caption }}</p>
-            </div>
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col><b>Photos by:</b> {{ collection.photographer }}</b-col>
-        </b-row>
-      </b-container>
+    <b-row>
+      <b-col></b-col>
+      <b-col><b>Photos by:</b> {{ report.photographer }}</b-col>
+      <b-col></b-col>
+    </b-row>
+    <b-row>
+      <b-col style="text-align: center;">
+        <div v-for="photo in report.photos" :key="photo" style="margin:10px; display: inline-block;">
+          <b-img thumbnail :src="'/assets/photos/' + year + '/' + photo.file"></b-img>
+          <p>{{ photo.caption }}</p>
+        </div>
+      </b-col>
     </b-row>
   </b-container>
 </template>

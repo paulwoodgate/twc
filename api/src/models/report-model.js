@@ -33,11 +33,18 @@ const reportSchema = new mongoose.Schema({
     required: [true, 'Please enter a walk rating']
   },
   coverPhoto: String,
-  photoCollections: Array
+  photographer: String,
+  photos: [
+    {
+      file: String,
+      caption: String
+    }
+  ]
 });
 
 reportSchema.set('toJSON', { virtuals: true });
 reportSchema.virtual('formattedDate').get(function () {
   return formatEventDate(this.date);
 });
+
 module.exports = mongoose.model('Report', reportSchema);
