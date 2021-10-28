@@ -2,18 +2,18 @@
 import mongoose from 'mongoose';
 
 export function connectToDB() {
-  mongoose.connect(
-    process.env.NODE_ENVIRONMENT == 'Test' ? process.env.MONGODB_TEST_URL : process.env.MONGODB_URL,
-    { useNewUrlParser: true, useUnifiedTopology: true },
-    (error) => {
-      if (error) {
-        console.log('Unable to connect to database');
-        throw error;
-      } else {
-        console.log(`Connected to MongoDB! at ${process.env.MONGODB_URL}`);
-      }
+  const mongoDBConnectionString = process.env.MONGODB_PROD_URL
+    ? process.env.MONGODB_PROD_URL
+    : process.env.MONGODB_DEV_URL;
+
+  mongoose.connect(mongoDBConnectionString, { useNewUrlParser: true, useUnifiedTopology: true }, (error) => {
+    if (error) {
+      console.log('Unable to connect to database');
+      throw error;
+    } else {
+      console.log(`Connected to MongoDB! at ${mongoDBConnectionString}`);
     }
-  );
+  });
 }
 
 mongoose.connection.on('disconnected', function () {
