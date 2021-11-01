@@ -1,8 +1,6 @@
-api/node_modules/**
-api/coverage/**
-api/dist/**
-api/assets/**
-client/node_modules/**
-client/src/assets/**
+/node_modules/**
+/coverage/**
+/dist/**
+/assets/**
 .vscode/launch.json
 .vscode/settings.json
