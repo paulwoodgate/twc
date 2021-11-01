@@ -1,6 +1,4 @@
 /node_modules/**
 /coverage/**
-/dist/**
-/assets/**
 .vscode/launch.json
 .vscode/settings.json
