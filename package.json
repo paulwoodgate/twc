@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "build": "npx babel ./src --out-dir ./build",
+    "build": "babel ./src --out-dir ./build",
     "dev": "npx nodemon --exec npx babel-node src/server.js",
     "debug": "npx nodemon --exec npx babel-node --inspect=9229 src/server.js",
     "start": "node ./build/server.js",
@@ -23,8 +23,11 @@
     "helmet": "^4.6.0",
     "hpp": "^0.2.3",
     "http": "0.0.1-security",
+    "install": "^0.13.0",
     "mongoose": "^6.0.12",
     "morgan": "^1.10.0",
+    "npm": "^8.1.2",
+    "regenerator-runtime": "^0.13.9",
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {

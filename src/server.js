@@ -1,5 +1,6 @@
 'use strict';
 
+import 'regenerator-runtime/runtime';
 import http from 'http';
 import app from './app';
 
