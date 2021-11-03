@@ -26,7 +26,7 @@ app.use(xss());
 app.use(hpp());
 app.use(helmet());
 app.use('/assets', express.static(path.join(__dirname, '../assets')));
-app.use(express.static(path.resolve(__dirname, './dist'), { maxAge: '1y', etag: false }));
+app.use(express.static(path.resolve(__dirname, '../dist'), { maxAge: '1y', etag: false }));
 
 const limiter = rateLimit({
   max: 150,
