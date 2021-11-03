@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(xss());
 app.use(hpp());
-app.use(helmet());
+app.use(helmet.contentSecurityPolicy({ useDefaults: true }));
 app.use('/assets', express.static(path.join(__dirname, '../assets')));
 app.use(express.static(path.resolve(__dirname, '../dist'), { maxAge: '1y', etag: false }));
 
