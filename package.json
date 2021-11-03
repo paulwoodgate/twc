@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "build": "babel ./src --out-dir ./build",
+    "build": "npx babel ./src --out-dir ./build",
     "dev": "npx nodemon --exec npx babel-node src/server.js",
     "debug": "npx nodemon --exec npx babel-node --inspect=9229 src/server.js",
     "start": "node ./build/server.js",
@@ -28,6 +28,7 @@
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.16.0",
     "@babel/core": "^7.15.8",
     "@babel/node": "^7.15.8",
     "@babel/preset-env": "^7.15.8",

@@ -1,4 +1,5 @@
 /node_modules/**
+/build/**
 /coverage/**
 .vscode/launch.json
 .vscode/settings.json
