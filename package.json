@@ -40,6 +40,7 @@
     "eslint-config-prettier": "^6.15.0",
     "jest": "^27.3.1",
     "mockingoose": "^2.15.2",
+    "nodemailer": "^6.7.1",
     "nodemon": "^2.0.14",
     "supertest": "^6.1.6"
   }
