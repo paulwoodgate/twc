@@ -11,3 +11,7 @@ exports.formatWeekendDates = (startDate, duration) => {
   }
   return `${format(startDate, 'eeee do MMMM')} to ${format(endDate, 'eeee do MMMM')}`;
 };
+
+exports.yearMonth = (date) => {
+  return format(date, 'yyyy/MM');
+};

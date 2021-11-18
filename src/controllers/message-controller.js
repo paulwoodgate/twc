@@ -12,15 +12,17 @@ exports.createMessage = async (req, res) => {
   });
 
   try {
-    const success = await Email.sendEmail(message);
+    const savedMsg = await message.save();
 
+    const success = await Email.sendEmail(message);
     if (!success) {
       res.status(500).json('An error occurred sending the email');
+      return;
     }
-    const savedMsg = await message.save();
+
     res.status(200).json(savedMsg);
   } catch (error) {
-    console.log('Error', error);
+    // console.log('Error', error);
     res.status(500).json(error);
   }
 };

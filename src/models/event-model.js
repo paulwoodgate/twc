@@ -1,7 +1,7 @@
 'use strict';
 
 import mongoose from 'mongoose';
-import { formatEventDate, formatWeekendDates } from '../services/date-service';
+import { formatEventDate, formatWeekendDates, yearMonth } from '../services/date-service';
 
 const eventSchema = new mongoose.Schema(
   {
@@ -60,6 +60,9 @@ eventSchema.virtual('formattedLength').get(function () {
 });
 eventSchema.virtual('formattedDistance').get(function () {
   return formatMiles(this.distanceAway);
+});
+eventSchema.virtual('yearMonth').get(function () {
+  return yearMonth(this.date);
 });
 
 function formatMiles(distance) {

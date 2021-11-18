@@ -15,10 +15,36 @@ exports.getAllEvents = async (req, res) => {
 exports.getUpcomingEvents = async (req, res) => {
   try {
     const now = startOfDay(new Date());
-    const results = await Event.find({ date: { $gte: now } })
+    const data = await Event.find({ date: { $gte: now } })
       .sort({ date: 'asc' })
-      .select('id type title image leave length formattedLength formattedDate date')
+      .select('id type title image length leave date')
       .exec();
+    const results = data.map((ev) => ({
+      id: ev.id,
+      type: ev.type,
+      title: ev.title,
+      image: ev.image,
+      leave: ev.leave,
+      length: ev.formattedLength,
+      date: ev.formattedDate,
+      month: ev.yearMonth
+    }));
+    res.status(200).json(results);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+exports.getUpcomingSummary = async (req, res) => {
+  try {
+    const now = startOfDay(new Date());
+    const data = await Event.find({ date: { $gte: now } })
+      .sort({ date: 'asc' })
+      .limit(4)
+      .select('id title date')
+      .exec();
+
+    const results = data.map((ev) => ({ id: ev.id, title: ev.title, date: ev.shortDate }));
     res.status(200).json(results);
   } catch (err) {
     res.status(500).json(err);

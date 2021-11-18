@@ -1,4 +1,4 @@
-import { formatEventDate, formatWeekendDates } from './date-service';
+import { formatEventDate, formatWeekendDates, yearMonth } from './date-service';
 
 describe('Date Service Tests', () => {
   describe('formatEventDate Test', () => {
@@ -16,6 +16,12 @@ describe('Date Service Tests', () => {
       expect(formatWeekendDates(new Date('29 Oct 2021'), 3)).toBe(
         'Friday 29th October to Monday 1st November'
       );
+    });
+  });
+
+  describe('MonthYear tests', () => {
+    test('it should return month and year of a date', () => {
+      expect(yearMonth(new Date('29 Feb 2000'))).toBe('2000/02');
     });
   });
 });
