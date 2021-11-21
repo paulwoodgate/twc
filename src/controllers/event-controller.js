@@ -2,6 +2,7 @@
 
 import Event from '../models/event-model';
 import { startOfDay } from 'date-fns';
+import { yearMonth, getMonthList } from '../services/date-service';
 
 exports.getAllEvents = async (req, res) => {
   try {
@@ -19,7 +20,7 @@ exports.getUpcomingEvents = async (req, res) => {
       .sort({ date: 'asc' })
       .select('id type title image length leave date')
       .exec();
-    const results = data.map((ev) => ({
+    const events = data.map((ev) => ({
       id: ev.id,
       type: ev.type,
       title: ev.title,
@@ -27,8 +28,13 @@ exports.getUpcomingEvents = async (req, res) => {
       leave: ev.leave,
       length: ev.formattedLength,
       date: ev.formattedDate,
-      month: ev.yearMonth
+      month: yearMonth(ev.date)
     }));
+    const months = getMonthList(events.map((ev) => ev.month));
+    const results = {
+      events: events,
+      months: months
+    };
     res.status(200).json(results);
   } catch (err) {
     res.status(500).json(err);

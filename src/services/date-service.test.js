@@ -1,4 +1,4 @@
-import { formatEventDate, formatWeekendDates, yearMonth } from './date-service';
+import { formatEventDate, formatWeekendDates, yearMonth, monthDesc, getMonthList } from './date-service';
 
 describe('Date Service Tests', () => {
   describe('formatEventDate Test', () => {
@@ -19,9 +19,45 @@ describe('Date Service Tests', () => {
     });
   });
 
-  describe('MonthYear tests', () => {
+  describe('YearMonth tests', () => {
     test('it should return month and year of a date', () => {
       expect(yearMonth(new Date('29 Feb 2000'))).toBe('2000/02');
+    });
+  });
+
+  describe('MonthDesc tests', () => {
+    test('it should return the full month and year of a YearMonth', () => {
+      expect(monthDesc('2020/11')).toBe('November 2020');
+    });
+  });
+
+  describe('getMonthList tests', () => {
+    test('it should return an array of objects', () => {
+      const yearMonths = ['2021/01', '2021/02'];
+
+      const list = getMonthList(yearMonths);
+
+      expect(list.length).toBe(3);
+      expect(list[0].text).toBe('(All months)');
+      expect(list[0].value).toBe('');
+      expect(list[1].text).toBe('January 2021');
+      expect(list[1].value).toBe('2021/01');
+      expect(list[2].text).toBe('February 2021');
+      expect(list[2].value).toBe('2021/02');
+    });
+
+    test('it should return a unique array of objects', () => {
+      const yearMonths = ['2021/01', '2021/02', '2021/02'];
+
+      const list = getMonthList(yearMonths);
+
+      expect(list.length).toBe(3);
+      expect(list[0].text).toBe('(All months)');
+      expect(list[0].value).toBe('');
+      expect(list[1].text).toBe('January 2021');
+      expect(list[1].value).toBe('2021/01');
+      expect(list[2].text).toBe('February 2021');
+      expect(list[2].value).toBe('2021/02');
     });
   });
 });
