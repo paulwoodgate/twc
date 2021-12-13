@@ -1,4 +1,11 @@
-import { formatEventDate, formatWeekendDates, yearMonth, monthDesc, getMonthList } from './date-service';
+import {
+  formatEventDate,
+  formatReportDates,
+  formatWeekendDates,
+  yearMonth,
+  monthDesc,
+  getMonthList
+} from './date-service';
 
 describe('Date Service Tests', () => {
   describe('formatEventDate Test', () => {
@@ -15,6 +22,18 @@ describe('Date Service Tests', () => {
     test('it should return the date of a weekend as Friday 29th October to Monday 1st November', () => {
       expect(formatWeekendDates(new Date('29 Oct 2021'), 3)).toBe(
         'Friday 29th October to Monday 1st November'
+      );
+    });
+  });
+
+  describe('formatReportDates Test', () => {
+    test('it should return single date if second passed date is null', () => {
+      expect(formatReportDates(new Date('6 Jun 2021'), null)).toBe('Sunday 6th June');
+    });
+
+    test('it should return interval if second passed date is not null', () => {
+      expect(formatReportDates(new Date('4 Jun 2021'), new Date('12 Jun 2021'))).toBe(
+        'Friday 4th to Saturday 12th June'
       );
     });
   });

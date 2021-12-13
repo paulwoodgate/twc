@@ -1,7 +1,7 @@
 'use strict';
 
 import mongoose from 'mongoose';
-import { formatEventDate } from '../services/date-service';
+import { formatReportDates } from '../services/date-service';
 
 const reportSchema = new mongoose.Schema({
   id: {
@@ -12,6 +12,9 @@ const reportSchema = new mongoose.Schema({
     type: Date,
     required: [true, 'Please enter the event date']
   },
+  endDate: {
+    type: Date
+  },
   year: {
     type: Number,
     required: [true, 'Please enter the event year']
@@ -19,6 +22,9 @@ const reportSchema = new mongoose.Schema({
   title: {
     type: String,
     required: [true, 'Please enter the event title']
+  },
+  subjectType: {
+    type: String
   },
   report: {
     type: Array,
@@ -44,7 +50,7 @@ const reportSchema = new mongoose.Schema({
 
 reportSchema.set('toJSON', { virtuals: true });
 reportSchema.virtual('formattedDate').get(function () {
-  return formatEventDate(this.date);
+  return formatReportDates(this.date, this.endDate);
 });
 
 module.exports = mongoose.model('Report', reportSchema);

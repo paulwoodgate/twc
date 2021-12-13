@@ -1,17 +1,29 @@
 'use strict';
 
 import { format, isSameMonth, addDays } from 'date-fns';
+const longFormat = 'eeee do MMMM';
+const shortFormat = 'eeee do';
 
 exports.formatEventDate = (date) => {
-  return format(date, 'eeee do MMMM');
+  return format(date, longFormat);
 };
 
 exports.formatWeekendDates = (startDate, duration) => {
   const endDate = addDays(startDate, duration);
   if (isSameMonth(startDate, endDate)) {
-    return `${format(startDate, 'eeee do')} to ${format(endDate, 'eeee do MMMM')}`;
+    return `${format(startDate, shortFormat)} to ${format(endDate, longFormat)}`;
   }
-  return `${format(startDate, 'eeee do MMMM')} to ${format(endDate, 'eeee do MMMM')}`;
+  return `${format(startDate, longFormat)} to ${format(endDate, longFormat)}`;
+};
+
+exports.formatReportDates = (startDate, endDate) => {
+  if (endDate == null) {
+    return format(startDate, longFormat);
+  }
+  if (isSameMonth(startDate, endDate)) {
+    return `${format(startDate, shortFormat)} to ${format(endDate, longFormat)}`;
+  }
+  return `${format(startDate, longFormat)} to ${format(endDate, longFormat)}`;
 };
 
 exports.yearMonth = (date) => {
