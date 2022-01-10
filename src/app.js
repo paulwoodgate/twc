@@ -28,10 +28,12 @@ app.use(
   helmet.contentSecurityPolicy({
     useDefaults: true,
     directives: {
-      'script-src': ["'self'", 'mongodb.com']
+      'script-src': ["'self'", 'mongodb.com'],
+      'img-src': ["'self'", 'https://ik.imagekit.io']
     }
   })
 );
+
 app.use('/assets', express.static(path.join(__dirname, '../assets')));
 app.use(express.static(path.resolve(__dirname, '../dist'), { maxAge: '1y', etag: false }));
 
