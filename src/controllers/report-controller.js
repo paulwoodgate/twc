@@ -46,7 +46,7 @@ exports.getReport = async (req, res) => {
 
       return dayReports.map((r) => ({
         id: r.id,
-        date: r.formattedDate,
+        formattedDate: r.formattedDate,
         title: r.title,
         year: r.year,
         coverPhoto: r.coverPhoto
